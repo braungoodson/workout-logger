@@ -1,0 +1,16 @@
+{
+  "name": "repo-0001",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "springy": "~2.3.0"
+  }
+}
