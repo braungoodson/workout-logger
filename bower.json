@@ -1,5 +1,5 @@
 {
-  "name": "repo-0001",
+  "name": "",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
@@ -11,6 +11,5 @@
     "tests"
   ],
   "dependencies": {
-    "springy": "~2.3.0"
   }
 }
