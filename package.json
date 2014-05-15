@@ -11,6 +11,7 @@
   "author": "",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "bower": "~1.2.8"
+    "bower": "~1.2.8",
+    "express": "~4.2.0"
   }
 }
