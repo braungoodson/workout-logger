@@ -1,22 +1,27 @@
-<div class="panel panel-default">
+<div class="panel panel-default" ng-controller="WorkoutsCreateController">
 	<div class="panel-heading">Create Workout</div>
 	<div class="panel-body">
-		<form class="navbar-form navbar-left" role="search">
+		<form class="navbar-form navbar-left" role="search" ng-submit="onSubmit();">
+
 			<div class="input-group">
 				<span class="input-group-addon">Type</span>
-				<input type="text" class="form-control" placeholder="Anaerbolic">
+				<input type="text" class="form-control" placeholder="Anaerbolic" ng-model="workout.type">
 			</div>
+
 			<div class="input-group">
 				<span class="input-group-addon">Start</span>
-				<input type="text" class="form-control" placeholder="Tue May 27 2014 13:03:36 GMT-0400 (Eastern Daylight Time)">
+				<input type="text" class="form-control" placeholder="Tue May 27 2014 13:03:36 GMT-0400 (Eastern Daylight Time)" ng-model="workout.start">
 			</div>
+
 			<div class="input-group">
 				<span class="input-group-addon">End</span>
-				<input type="text" class="form-control" placeholder="Tue May 27 2014 13:03:36 GMT-0400 (Eastern Daylight Time)">
+				<input type="text" class="form-control" placeholder="Tue May 27 2014 13:03:36 GMT-0400 (Eastern Daylight Time)" ng-model="workout.end">
 			</div>
+
 			<div class="input-group">
 				<button type="submit" class="btn btn-default">Submit</button>
 			</div>
+			
 		</form>
 	</div>
 </div>
