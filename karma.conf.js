@@ -23,23 +23,51 @@ module.exports = function(config) {
     ],
 
 
-    // list of files to exclude
-    exclude: [
-      
+    // test results reporter to use
+    // possible values: 'dots', 'progress'
+    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
+    // coverage reporter generates the coverage
+    reporters: ['progress', 'mocha', 'junit', 'coverage'],
+
+
+    //
+    plugins: [
+      'karma-coverage',
+      'karma-jasmine',
+      'karma-mocha-reporter',
+      'karma-junit-reporter',
+      'karma-phantomjs-launcher'
     ],
 
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-    
+      // source files, that you wanna generate coverage for
+      // do not include tests or libraries
+      // (these files will be instrumented by Istanbul)
+      'index.js': ['coverage']
     },
 
 
-    // test results reporter to use
-    // possible values: 'dots', 'progress'
-    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    // optionally, configure the reporter
+    coverageReporter: {
+      type : 'html',
+      dir : 'coverage/'
+    },
+
+
+    //
+    junitReporter: {
+      outputFile: 'junit/test-results.xml',
+      suite: ''
+    },
+
+
+    // list of files to exclude
+    exclude: [
+      
+    ],
 
 
     // web server port
@@ -66,6 +94,6 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    singleRun: true
   });
 };
