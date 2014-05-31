@@ -1,0 +1,25 @@
+<div class="panel panel-default" ng-controller="SetsCreateController">
+	<div class="panel-heading">Create Set</div>
+	<div class="panel-body">
+		<form class="navbar-form navbar-left" role="search" ng-submit="onSubmit();">
+
+			<div class="input-group">
+				<span class="input-group-addon">Name</span>
+				<input type="text" class="form-control" placeholder="Flat Bench Press" ng-model="set.name" required>
+			</div>
+
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="225" ng-model="set.weight" required>
+				<span class="input-group-addon">lbs/kgs</span>
+				<span class="input-group-addon">X</span>
+				<input type="text" class="form-control" placeholder="12" ng-model="set.X" required>
+			</div>
+
+			<div class="input-group">
+				<input type="submit" class="btn btn-default" />
+				<span ng-show="hydrate"> {{workout}}</span>
+			</div>
+
+		</form>
+	</div>
+</div>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<testsuites>
+  <testsuite name="PhantomJS 1.9.7 (Mac OS X)" package="" timestamp="2014-05-30T02:10:28" id="0" hostname="brauns-iMac.local">
+    <properties>
+      <property name="browser.fullName" value="Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.7 Safari/534.34"/>
+    </properties>
+  </testsuite>
+  <testsuite name="PhantomJS 1.9.7 (Mac OS X)" package="" timestamp="2014-05-30T02:10:28" id="0" hostname="brauns-iMac.local" tests="2" errors="0" failures="0" time="0.015">
+    <properties>
+      <property name="browser.fullName" value="Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.7 Safari/534.34"/>
+    </properties>
+    <testcase name="should send workout data" time="0.015" classname="PhantomJS 1.9.7 (Mac OS X).WorkoutsCreateController"/>
+    <testcase name="should exist" time="0" classname="PhantomJS 1.9.7 (Mac OS X).app"/>
+    <system-out><![CDATA[
+]]></system-out>
+    <system-err/>
+  </testsuite>
+</testsuites>
