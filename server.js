@@ -6,18 +6,17 @@ var express = require('express'),
   port = process.env.PORT || 30000,
   staticRoot = __dirname;
 
-console.log('configuring database');
-
-dataClient.connect('mongodb://localhost:27017/workoutlogger',function(e,db){
+function dataClient_connectHandler (e,db){
 	if (e) {
 		throw new Error(e);
 	} else {
 		console.log('connected to database');
 		dataClient.db = db;
 		dataClient.workouts = db.collection('workouts');
+		dataClient.sets = db.collection('sets');
 		configServer();
 	}
-});
+}
 
 function configServer () {
 	console.log('configuring server');
@@ -36,4 +35,18 @@ function configServer () {
 			}
 		});
 	});
+	server.post('/sets',function(q,r){
+		var set = q.body;
+		dataClient.sets.insert(set,function(e,sets){
+			if (e) {
+				r.send({error:e});
+				throw new Error(e);
+			} else {
+				r.send(sets[0]);
+			}
+		})
+	});
 }
+
+console.log('configuring database');
+dataClient.connect('mongodb://localhost:27017/workoutlogger',dataClient_connectHandler);
