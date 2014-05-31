@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start --no-single-run",
+    "test": "./node_modules/karma/bin/karma start --single-run",
     "start": "node server.js",
     "postinstall": "./node_modules/bower/bin/bower install && mkdir -p ./data/db"
   },
