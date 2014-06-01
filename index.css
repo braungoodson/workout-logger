@@ -32,3 +32,17 @@
 		-webkit-transform: rotate(360deg);
 	}
 }
+
+canvas {
+	width:100%;
+}
+
+.carousel-control.left {
+	background-image:linear-gradient(to right,rgba(255, 255, 255, 0.5) 0,rgba(0,0,0,.0001) 100%);
+}
+
+.carousel-control.right {
+	background-image:linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(255, 255, 255, 0.5) 100%);
+}
+
+.glyphicon-chevron-left.glyphicon:hover {}
