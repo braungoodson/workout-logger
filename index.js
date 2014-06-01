@@ -9,6 +9,7 @@ function Router ($routeProvider) {
 	$routeProvider.when('/',{templateUrl:'views/index.html'});
 	$routeProvider.when('/workouts/create',{templateUrl:'views/workouts/create.html'});
 	$routeProvider.when('/workouts/read',{templateUrl:'views/workouts/read.html'});
+	$routeProvider.when('/workouts/metrics',{templateUrl:'views/workouts/metrics.html'});
 	$routeProvider.when('/sets/create',{templateUrl:'views/sets/create.html'});
 	$routeProvider.otherwise({redirectTo:'/'});
 }

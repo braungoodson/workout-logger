@@ -32,3 +32,8 @@
 		-webkit-transform: rotate(360deg);
 	}
 }
+
+.carousel-control,
+.carousel-inner {
+	border-radius: 5px;
+}
