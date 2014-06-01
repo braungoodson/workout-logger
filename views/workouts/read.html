@@ -9,7 +9,7 @@
 						<span class="glyphicon glyphicon-search"></span>
 					</button>
 				</span>
-				<input type="text" class="form-control" placeholder="Anaerbolic" ng-model="workout.type" name="workoutType" required>
+				<input type="text" class="form-control" placeholder="Anaerbolic" ng-model="query" name="workoutType" required>
 			</div>
 			
 		</form>
@@ -20,10 +20,10 @@
 			<th>Start</th>
 			<th>End</th>
 		</tr>
-		<tr ng-repeat="w in workouts">
+		<tr ng-repeat="w in workouts | filter:query">
 			<td>{{w.type}}</td>
-			<td>{{w.start()}}</td>
-			<td>{{w.end()}}</td>
+			<td>{{w.start}}</td>
+			<td>{{w.end}}</td>
 		</tr>
 	</table>
 </div>
