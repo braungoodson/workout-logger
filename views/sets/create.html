@@ -1,9 +1,11 @@
 <section ng-controller="SetsCreateController">
 	<div class="panel panel-default">
-		<div class="panel-heading">Create Set<span ng-show="hydrateWorkout" class="hydrate">{{workout.digest()}}</span></div>
+		<div class="panel-heading">Create Sets</div>
 		<div class="panel-body">
 			<form class="navbar-form navbar-left escpae-buffer" role="search" ng-submit="onSubmit();" name="setForm">
-
+				<p class="bg-info" ng-show="hydrateWorkout">
+					<span class="hydrate">{{workout.digest()}}</span>
+				</p>
 				<div class="input-group">
 					<span class="input-group-addon">Name</span>
 					<input type="text" class="form-control" placeholder="Flat Bench Press" ng-model="set.name" required>
@@ -17,7 +19,11 @@
 				</div>
 
 				<div class="input-group escape-buffer">
-					<input type="submit" class="btn btn-default" />
+					<input type="submit" class="btn btn-default" ng-show="!busy" />
+					<br />
+					<button type="button" class="btn btn-default btn-busy" ng-show="busy">
+						<span class="glyphicon glyphicon-refresh glyphicon-busy"></span>
+					</button>
 				</div>
 
 			</form>

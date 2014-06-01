@@ -14,12 +14,31 @@ function Router ($routeProvider) {
 }
 
 function WorkoutsReadController ($scope,$http) {
-	$scope.workouts 
+	$scope.busy = false;
+	$scope.workouts = [];
+	$scope.busy = true;
+	$http.get('/workouts').success(function(data){
+		$scope.workouts = data.workouts;
+		$scope.busy = false;
+	}).error(function(){
+		throw new Error(arguments);
+	});
 }
 
 function WorkoutsCreateController ($scope,$http,$location) {
+	$scope.busy = false;
+	$scope.workout = {};
+	$scope.getNow = function (position) {
+		if (position == "start") {
+			$scope.workout.start = new Date();
+		} else {
+			$scope.workout.end = new Date();
+		}
+	}
 	$scope.onSubmit = function () {
+		$scope.busy = true;
 		$http.post('/workouts',$scope.workout).success(function(data){
+			$scope.busy = false;
 			$location.path('/sets/create');
 			$location.hash(JSON.stringify(data));
 		}).error(function(){
@@ -29,6 +48,7 @@ function WorkoutsCreateController ($scope,$http,$location) {
 }
 
 function SetsCreateController ($scope,$location,$http) {
+	$scope.busy = false;
 	$scope.workout = {};
 	$scope.hydrateWorkout = false;
 	$scope.sets = [];
@@ -38,7 +58,7 @@ function SetsCreateController ($scope,$location,$http) {
 		$scope.workout = JSON.parse($location.hash());
 		$scope.workout.digest = function () {
 			var d = "";
-			d += " for ";
+			d += " For Workout ";
 			d += new Date($scope.workout.start).getMonth() + '/';
 			d += new Date($scope.workout.start).getDate() + '/';
 			d += new Date($scope.workout.start).getFullYear() + ' @ ';
@@ -50,12 +70,15 @@ function SetsCreateController ($scope,$location,$http) {
 		}
 	}
 	$scope.onSubmit = function (queue) {
+		$scope.busy = false;
+		$scope.busy = true;
 		$scope.set.wid = $scope.workout._id;
 		$http.post('/sets',$scope.set).success(function(data){
 			if (!$scope.hydrateSets) {
 				$scope.hydrateSets = true;
 			}
 			$scope.sets.push(data);
+			$scope.busy = false;
 		}).error(function(){
 			throw new Error(arguments);
 		});

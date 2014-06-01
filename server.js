@@ -24,6 +24,16 @@ function configServer () {
 	server.use('/', express.static(staticRoot));
 	server.listen(port);
 	console.log('server up on port '+port);
+	server.get('/workouts',function(q,r){
+		dataClient.workouts.find({}).toArray(function(e,workouts){
+			if (e) {
+				r.send({error:e});
+				throw new Error(e);
+			} else {
+				r.send({workouts:workouts});
+			}
+		});
+	});
 	server.post('/workouts',function(q,r){
 		var workout = q.body;
 		dataClient.workouts.insert(workout,function(e,workouts){

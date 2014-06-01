@@ -1,5 +1,5 @@
 <div class="panel panel-default" ng-controller="WorkoutsCreateController">
-	<div class="panel-heading">Create Workout</div>
+	<div class="panel-heading">Create Workouts</div>
 	<div class="panel-body">
 		<form class="navbar-form navbar-left" role="search" ng-submit="onSubmit();" name="workoutForm">
 
@@ -11,11 +11,21 @@
 			<div class="input-group">
 				<span class="input-group-addon">Start</span>
 				<input type="text" class="form-control" placeholder="Tue May 27 2014 13:03:36 GMT-0400 (Eastern Daylight Time)" ng-model="workout.start" required>
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button" ng-click="getNow('start');">
+						<span class="glyphicon glyphicon-plus"></span>
+					</button>
+				</span>
 			</div>
 
 			<div class="input-group">
 				<span class="input-group-addon">End</span>
 				<input type="text" class="form-control" placeholder="Tue May 27 2014 13:03:36 GMT-0400 (Eastern Daylight Time)" ng-model="workout.end" required>
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button" ng-click="getNow('end');">
+						<span class="glyphicon glyphicon-plus"></span>
+					</button>
+				</span>
 			</div>
 
 			<div class="input-group">

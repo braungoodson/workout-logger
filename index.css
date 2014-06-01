@@ -2,10 +2,33 @@
 	margin-bottom:15px;
 }
 
+.bg-info {
+	padding:15px;
+}
+
 .hydrate {
-	color:white;
+	color:#555;
 }
 
 .escape-buffer {
 	margin-bottom:0px;
+}
+
+.btn-busy {
+	width:70px;
+	padding-bottom:0px;
+	padding-top:4px;
+}
+
+.glyphicon-busy {
+	font-size:23px;
+	-webkit-animation: spin .5s ease 0s infinite;
+}
+
+@-webkit-keyframes spin {
+	from {
+		-webkit-transform: rotate(0deg);
+	} to {
+		-webkit-transform: rotate(360deg);
+	}
 }
