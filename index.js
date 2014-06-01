@@ -1,8 +1,9 @@
 var app = angular.module('app',['ngRoute']);
 
 app.config(['$routeProvider',Router]);
-app.controller('WorkoutsCreateController',['$scope','$http',WorkoutsReadController]);
+app.controller('WorkoutsReadController',['$scope','$http',WorkoutsReadController]);
 app.controller('WorkoutsCreateController',['$scope','$http','$location',WorkoutsCreateController]);
+app.controller('WorkoutsMetricsController',['$scope','$http',WorkoutsMetricsController]);
 app.controller('SetsCreateController',['$scope','$location','$http',SetsCreateController]);
 
 function Router ($routeProvider) {
@@ -12,6 +13,10 @@ function Router ($routeProvider) {
 	$routeProvider.when('/workouts/metrics',{templateUrl:'views/workouts/metrics.html'});
 	$routeProvider.when('/sets/create',{templateUrl:'views/sets/create.html'});
 	$routeProvider.otherwise({redirectTo:'/'});
+}
+
+function WorkoutsMetricsController ($scope,$http) {
+
 }
 
 function WorkoutsReadController ($scope,$http) {
