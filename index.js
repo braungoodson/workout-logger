@@ -1,10 +1,12 @@
 var app = angular.module('app',['ngRoute']);
 
 app.config(['$routeProvider',Router]);
-app.controller('WorkoutsReadController',['$scope','$http',WorkoutsReadController]);
 app.controller('WorkoutsCreateController',['$scope','$http','$location',WorkoutsCreateController]);
+app.controller('WorkoutsReadController',['$scope','$http',WorkoutsReadController]);
 app.controller('WorkoutsMetricsController',['$scope','$http',WorkoutsMetricsController]);
 app.controller('SetsCreateController',['$scope','$location','$http',SetsCreateController]);
+app.controller('SetsReadController',['$scope','$http',SetsReadController]);
+app.controller('SetsMetricsController',['$scope','$http',SetsMetricsController]);
 
 function Router ($routeProvider) {
 	$routeProvider.when('/',{templateUrl:'views/index.html'});
@@ -12,6 +14,8 @@ function Router ($routeProvider) {
 	$routeProvider.when('/workouts/read',{templateUrl:'views/workouts/read.html'});
 	$routeProvider.when('/workouts/metrics',{templateUrl:'views/workouts/metrics.html'});
 	$routeProvider.when('/sets/create',{templateUrl:'views/sets/create.html'});
+	$routeProvider.when('/sets/read',{templateUrl:'views/sets/read.html'});
+	$routeProvider.when('/sets/metrics',{templateUrl:'views/sets/metrics.html'});
 	$routeProvider.otherwise({redirectTo:'/'});
 }
 
@@ -109,4 +113,49 @@ function SetsCreateController ($scope,$location,$http) {
 			throw new Error(arguments);
 		});
 	}
+}
+
+function SetsReadController ($scope,$http) {
+	$scope.busy = false;
+	$scope.sets = [];
+	$scope.busy = true;
+	$http.get('/sets').success(function(data){
+		$scope.sets = data.sets;
+		$scope.busy = false;
+	}).error(function(){
+		throw new Error(arguments);
+	});
+}
+
+function SetsMetricsController ($scope,$http) {
+	$scope.busy = false;
+	$scope.sets = [];
+	$scope.busy = true;
+	$http.get('/sets').success(function(data){
+		$scope.sets = data.sets;
+		$scope.busy = false;
+	}).error(function(){
+		throw new Error(arguments);
+	});
+	var data = {
+		labels : ["January","February","March","April","May","June","July"],
+		datasets : [
+			{
+				fillColor : "rgba(220,220,220,0.5)",
+				strokeColor : "rgba(220,220,220,1)",
+				pointColor : "rgba(220,220,220,1)",
+				pointStrokeColor : "#fff",
+				data : [65,59,90,81,56,55,40]
+			},
+			{
+				fillColor : "rgba(151,187,205,0.5)",
+				strokeColor : "rgba(151,187,205,1)",
+				pointColor : "rgba(151,187,205,1)",
+				pointStrokeColor : "#fff",
+				data : [28,48,40,19,96,27,100]
+			}
+		]
+	};
+	var ctx = document.getElementById("sets-metrics-spline").getContext("2d");
+	new Chart(ctx).Line(data);
 }

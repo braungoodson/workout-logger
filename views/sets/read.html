@@ -1,0 +1,29 @@
+<div class="panel panel-default" ng-controller="SetsReadController">
+	<div class="panel-heading">Read Sets</div>
+	<div class="panel-body">
+		<form class="navbar-form navbar-left" role="search" ng-submit="" name="setForm">
+
+			<div class="input-group escape-buffer">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button" ng-click="">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+				</span>
+				<input type="text" class="form-control" placeholder="Flat Bench Press" ng-model="query" name="setName" required>
+			</div>
+			
+		</form>
+	</div>
+	<table class="table">
+		<tr>
+			<th>Type</th>
+			<th>Start</th>
+			<th>End</th>
+		</tr>
+		<tr ng-repeat="s in sets | filter:query">
+			<td>{{s.name}}</td>
+			<td>{{s.weight}}</td>
+			<td>{{s.X}}</td>
+		</tr>
+	</table>
+</div>

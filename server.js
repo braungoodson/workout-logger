@@ -45,6 +45,16 @@ function configServer () {
 			}
 		});
 	});
+	server.get('/sets',function(q,r){
+		dataClient.sets.find({}).toArray(function(e,sets){
+			if (e) {
+				r.send({error:e});
+				throw new Error(e);
+			} else {
+				r.send({sets:sets});
+			}
+		});
+	});
 	server.post('/sets',function(q,r){
 		var set = q.body;
 		dataClient.sets.insert(set,function(e,sets){
