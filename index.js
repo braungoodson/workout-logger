@@ -20,27 +20,51 @@ function Router ($routeProvider) {
 }
 
 function WorkoutsMetricsController ($scope,$http) {
-	var data = {
-		labels : ["January","February","March","April","May","June","July"],
-		datasets : [
-			{
-				fillColor : "rgba(220,220,220,0.5)",
-				strokeColor : "rgba(220,220,220,1)",
-				pointColor : "rgba(220,220,220,1)",
-				pointStrokeColor : "#fff",
-				data : [65,59,90,81,56,55,40]
-			},
-			{
-				fillColor : "rgba(151,187,205,0.5)",
-				strokeColor : "rgba(151,187,205,1)",
-				pointColor : "rgba(151,187,205,1)",
-				pointStrokeColor : "#fff",
-				data : [28,48,40,19,96,27,100]
-			}
-		]
-	};
-	var ctx = document.getElementById("workout-metrics-spline").getContext("2d");
-	new Chart(ctx).Line(data);
+	$scope.busy = false;
+	$scope.workouts = [];
+	$scope.chartData = {};
+	$scope.sets = [];
+
+
+
+	$http.get('/sets').success(function(data){
+		$scope.sets = data.sets;
+		$scope.busy = false;
+		var sets = $scope.sets;
+		var hash = new Hash();
+		for (var i in sets) {
+			hash.set(sets[i].wid,sets[i].wid);
+		}
+		hash.forEach(function(key,value){
+			console.log(key)
+		});
+	}).error(function(){
+		throw new Error(arguments);
+	});
+
+
+
+var data = {
+	labels : ["January","February","March","April","May","June","July"],
+	datasets : [
+		{
+			fillColor : "rgba(220,220,220,0.0)",
+			strokeColor : "rgba(220,220,220,1)",
+			pointColor : "rgba(220,220,220,1)",
+			pointStrokeColor : "#fff",
+			data : [125,125,135,135,155] // `Flat Bench Press` from 5 workouts in chronological order
+		},
+		{
+			fillColor : "rgba(151,187,205,0.0)",
+			strokeColor : "rgba(151,187,205,1)",
+			pointColor : "rgba(151,187,205,1)",
+			pointStrokeColor : "#fff",
+			data : [105,105,115,115,125] // 'Lateral Pull Downs' from same 5 workouts
+		}
+	]
+}
+var ctx = document.getElementById("workout-metrics-spline").getContext("2d");
+var myNewChart = new Chart(ctx).Line(data);
 }
 
 function WorkoutsReadController ($scope,$http) {
