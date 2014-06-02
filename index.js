@@ -36,14 +36,13 @@ function WorkoutsMetricsController ($scope,$http) {
 		for (var i in w) {
 			data.labels.push(new Date(w[i].start).getDate()*new Date(w[i].start).getMonth());
 			$http.get('/workouts/'+w[i]._id+'/sets/names').success(function(data){
-				var names = data;
+				var names = data.names;
 				for (var j in names) {
-					data.datasets.push({
-						fillColor : "rgba(220,220,220,0.0)",
-						strokeColor : "rgba(220,220,220,1)",
-						pointColor : "rgba(220,220,220,1)",
-						pointStrokeColor : "#fff",
-						data : [125,125,135,135,155] // `Flat Bench Press` from 5 workouts in chronological order
+					$http.get('/sets/names/'+btoa(names[j])).success(function(data){
+						var sets = data.sets;
+						console.log(sets);
+					}).error(function(){
+						throw new Error(arguments);
 					});
 				}
 			}).error(function(){

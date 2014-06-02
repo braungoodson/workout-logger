@@ -14,7 +14,8 @@
     "bower": "~1.2.8",
     "express": "~4.2.0",
     "mongodb": "~1.4.5",
-    "body-parser": "~1.2.2"
+    "body-parser": "~1.2.2",
+    "atob": "~1.1.2"
   },
   "devDependencies": {
     "karma-jasmine": "~0.1.5",

@@ -1,6 +1,7 @@
 var express = require('express'),
 	bodyParser = require('body-parser'),
 	mongodb = require('mongodb'),
+	atob = require('atob'),
 	ObjectId = mongodb.ObjectID,
 	dataClient = mongodb.MongoClient,
   server = express(),
@@ -454,6 +455,16 @@ function configServer () {
 				r.send(sets[0]);
 			}
 		})
+	});
+	server.get('/sets/names/:name',function(q,r){
+		dataClient.sets.find({name:atob(q.params.name)}).toArray(function(e,sets){
+			if (e) {
+				r.send({error:e});
+				throw new Error(e);
+			} else {
+				r.send({sets:sets});
+			}
+		});
 	});
 }
 
