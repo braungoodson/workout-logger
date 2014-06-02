@@ -456,6 +456,16 @@ function configServer () {
 			}
 		})
 	});
+	server.get('/sets/:wid',function(q,r){
+		dataClient.sets.find({wid:new ObjectId(q.params.wid)}).toArray(function(e,sets){
+			if (e) {
+				r.send({error:e});
+				throw new Error(e);
+			} else {
+				r.send({sets:sets});
+			}
+		});
+	});
 	server.get('/sets/names/:name',function(q,r){
 		dataClient.sets.find({name:atob(q.params.name)}).toArray(function(e,sets){
 			if (e) {

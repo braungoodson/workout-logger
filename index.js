@@ -23,7 +23,7 @@ function WorkoutsMetricsController ($scope,$http) {
 	$scope.busy = false;
 	$scope.workouts = [];
 
-
+var k = 0;
 	$scope.busy = true;
 	$http.get('/workouts').success(function(data){
 		$scope.workouts = data.workouts;
@@ -40,7 +40,7 @@ function WorkoutsMetricsController ($scope,$http) {
 				for (var j in names) {
 					$http.get('/sets/names/'+btoa(names[j])).success(function(data){
 						var sets = data.sets;
-						console.log(sets);
+						console.log(sets,k++);
 					}).error(function(){
 						throw new Error(arguments);
 					});
@@ -69,7 +69,7 @@ var data = {
 			strokeColor : "rgba(151,187,205,1)",
 			pointColor : "rgba(151,187,205,1)",
 			pointStrokeColor : "#fff",
-			data : [105,105,115,115,125] // 'Lateral Pull Downs' from same 5 workouts
+			data : [105,115,115,115,125] // 'Lateral Pull Downs' from same 5 workouts
 		}
 	]
 }
