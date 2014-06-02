@@ -22,26 +22,37 @@ function Router ($routeProvider) {
 function WorkoutsMetricsController ($scope,$http) {
 	$scope.busy = false;
 	$scope.workouts = [];
-	$scope.chartData = {};
-	$scope.sets = [];
 
 
-
-	$http.get('/sets').success(function(data){
-		$scope.sets = data.sets;
+	$scope.busy = true;
+	$http.get('/workouts').success(function(data){
+		$scope.workouts = data.workouts;
 		$scope.busy = false;
-		var sets = $scope.sets;
-		var hash = new Hash();
-		for (var i in sets) {
-			hash.set(sets[i].wid,sets[i].wid);
+		var data = {
+			labels: [],
+			datasets: []
+		};
+		var w = $scope.workouts;
+		for (var i in w) {
+			data.labels.push(new Date(w[i].start).getDate()*new Date(w[i].start).getMonth());
+			$http.get('/workouts/'+w[i]._id+'/sets/names').success(function(data){
+				var names = data;
+				for (var j in names) {
+					data.datasets.push({
+						fillColor : "rgba(220,220,220,0.0)",
+						strokeColor : "rgba(220,220,220,1)",
+						pointColor : "rgba(220,220,220,1)",
+						pointStrokeColor : "#fff",
+						data : [125,125,135,135,155] // `Flat Bench Press` from 5 workouts in chronological order
+					});
+				}
+			}).error(function(){
+				throw new Error(arguments);
+			});
 		}
-		hash.forEach(function(key,value){
-			console.log(key)
-		});
 	}).error(function(){
 		throw new Error(arguments);
 	});
-
 
 
 var data = {

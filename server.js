@@ -8,7 +8,6 @@ var express = require('express'),
   staticRoot = __dirname;
 
 function primeDatabase () {
-
 	dataClient.workouts.find({}).toArray(function(e,workouts){
 		console.log('priming database');
 		if (e) {
@@ -412,6 +411,36 @@ function configServer () {
 				throw new Error(e);
 			} else {
 				r.send({sets:sets});
+			}
+		});
+	});
+	server.get('/workouts/:wid/sets',function(q,r){
+		dataClient.sets.find({wid:new ObjectId(q.params.wid)}).toArray(function(e,sets){
+			if (e) {
+				r.send({error:e});
+				throw new Error(e);
+			} else {
+				r.send({sets:sets});
+			}
+		});
+	});
+	server.get('/workouts/:wid/sets/names',function(q,r){
+		dataClient.sets.find({wid:new ObjectId(q.params.wid)}).toArray(function(e,sets){
+			if (e) {
+				r.send({error:e});
+				throw new Error(e);
+			} else {
+				var names = [];
+				for (var j in sets) {
+					if (!names[sets[j].name]) {
+						names[sets[j].name] = sets[j].name;
+					}
+				}
+				var _names = [];
+				for (var j in names) {
+					_names.push(j);
+				}
+				r.send({names:_names});
 			}
 		});
 	});
